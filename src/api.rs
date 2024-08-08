@@ -1,14 +1,5 @@
-use std::sync::Mutex;
 use actix_web::{get, web, HttpResponse, Responder};
-
-pub struct AppState {
-    pub app_name: String,
-    pub version: String,
-}
-
-pub struct AppStateWithCounter {
-    pub counter: Mutex<i32>,
-}
+use crate::app_state::{AppState, AppStateWithCounter};
 
 #[get("/counter")]
 pub async fn counter_api(data: web::Data<AppStateWithCounter>) -> String {
