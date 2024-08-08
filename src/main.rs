@@ -19,7 +19,10 @@ async fn main() -> std::io::Result<()> {
     HttpServer::new(move || {
         App::new()
             .app_data(counter.clone())
-            .route("/counter", web::get().to(counter_api))
+            // both of the approaches to call the `counter_api` works
+            // .route("/counter", web::get().to(counter_api))
+            .service(counter_api)
+
             .service(index)
             .service(greet)
     })

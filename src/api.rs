@@ -5,6 +5,7 @@ pub struct AppStateWithCounter {
     pub counter: Mutex<i32>,
 }
 
+#[get("/counter")]
 pub async fn counter_api(data: web::Data<AppStateWithCounter>) -> String {
     let mut counter = data.counter.lock().unwrap();
     *counter += 1;
