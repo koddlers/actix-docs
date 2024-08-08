@@ -1,6 +1,11 @@
 use std::sync::Mutex;
 use actix_web::{get, web, HttpResponse, Responder};
 
+pub struct AppState {
+    pub app_name: String,
+    pub version: String,
+}
+
 pub struct AppStateWithCounter {
     pub counter: Mutex<i32>,
 }
@@ -21,4 +26,12 @@ async fn index() -> impl Responder {
 #[get("/greet")]
 async fn greet() -> impl Responder {
     HttpResponse::Ok().body("Hello World!")
+}
+
+#[get("/info")]
+async fn info(data: web::Data<AppState>) -> String {
+    let app = &data.app_name;
+    let version = &data.version;
+
+    format!("App name: {app}, version: {version}")
 }
