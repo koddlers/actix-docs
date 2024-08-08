@@ -1,28 +1,10 @@
+mod api;
+
+use api::{counter_api, greet, index};
+
+use actix_web::{web, App, HttpServer};
+use api::AppStateWithCounter;
 use std::sync::Mutex;
-use actix_web::{get, web, App, HttpResponse, HttpServer, Responder};
-
-
-struct AppStateWithCounter {
-    counter: Mutex<i32>,
-}
-
-async fn counter_api(data: web::Data<AppStateWithCounter>) -> String {
-    let mut counter = data.counter.lock().unwrap();
-    *counter += 1;
-
-    format!("Request number: {counter}")
-}
-
-
-#[get("/")]
-async fn index() -> impl Responder {
-    HttpResponse::Ok().body(".::Welcome to Actix Web::.")
-}
-
-#[get("/greet")]
-async fn greet() -> impl Responder {
-    HttpResponse::Ok().body("Hello World!")
-}
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
