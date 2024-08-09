@@ -4,7 +4,7 @@ mod app_state;
 use actix_web::{web, App, HttpServer};
 use std::sync::Mutex;
 
-use api::{counter_api, greet, index, info};
+use api::{counter_api, greet, index, info, echo};
 use app_state::{AppState, AppStateWithCounter};
 
 #[actix_web::main]
@@ -32,6 +32,7 @@ async fn main() -> std::io::Result<()> {
             .service(info)
             .service(index)
             .service(greet)
+            .service(echo)
     })
         .bind((host, port))?
         .run()

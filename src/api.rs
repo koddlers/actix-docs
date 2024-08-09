@@ -1,4 +1,4 @@
-use actix_web::{get, web, HttpResponse, Responder};
+use actix_web::{get, post, web, HttpResponse, Responder};
 use crate::app_state::{AppState, AppStateWithCounter};
 
 #[get("/counter")]
@@ -17,6 +17,11 @@ async fn index() -> impl Responder {
 #[get("/greet")]
 async fn greet() -> impl Responder {
     HttpResponse::Ok().body("Hello World!")
+}
+
+#[post("/echo")]
+async fn echo(message: String) -> impl Responder {
+    HttpResponse::Ok().body(message)
 }
 
 #[get("/info")]
