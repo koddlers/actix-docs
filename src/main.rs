@@ -1,10 +1,11 @@
 mod api;
 mod app_state;
+mod models;
 
 use actix_web::{web, App, HttpServer};
 use std::sync::Mutex;
 
-use api::{counter_api, greet, index, info, echo};
+use api::{counter_api, echo, greet, index, info};
 use app_state::{AppState, AppStateWithCounter};
 
 #[actix_web::main]
